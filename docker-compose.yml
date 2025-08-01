@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   iot1:
     build: ./iot_device
@@ -21,4 +19,10 @@ services:
 
 networks:
   macvlan_net:
-    external: true
+    driver: macvlan
+    driver_opts:
+      parent: ${INTERFACE}
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GATEWAY}
